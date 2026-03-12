@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Fonts ──────────────────────────────────────────── */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Outfit", sans-serif;
+
+  /* ── Brand palette ──────────────────────────────────── */
+  --color-ink: oklch(14% 0.02 260);
+  --color-ink-light: oklch(22% 0.025 260);
+  --color-ink-muted: oklch(45% 0.02 260);
+
+  --color-parchment: oklch(97% 0.01 80);
+  --color-parchment-dark: oklch(92% 0.015 80);
+  --color-parchment-darker: oklch(87% 0.02 80);
+
+  --color-gold: oklch(72% 0.12 75);
+  --color-gold-light: oklch(82% 0.1 75);
+  --color-gold-dark: oklch(58% 0.1 75);
+
+  --color-danger: oklch(52% 0.18 25);
+
+  /* ── Spacing extras ─────────────────────────────────── */
+  --spacing-18: 4.5rem;
+
+  /* ── Shadows ────────────────────────────────────────── */
+  --shadow-card: 0 1px 4px oklch(14% 0.02 260 / 0.06), 0 4px 16px oklch(14% 0.02 260 / 0.06);
+  --shadow-card-hover: 0 4px 12px oklch(14% 0.02 260 / 0.1), 0 12px 32px oklch(14% 0.02 260 / 0.1);
+  --shadow-modal: 0 8px 40px oklch(14% 0.02 260 / 0.22);
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-body);
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background: var(--color-gold-light);
+    color: var(--color-ink);
+  }
+}
+
+/* ── Component utilities ───────────────────────────────── */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+
+    &:active { transform: scale(0.97); }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  .btn-primary {
+    composes: btn;
+    background: var(--color-ink);
+    color: var(--color-parchment);
+    &:hover { background: var(--color-ink-light); }
+  }
+
+  .btn-ghost {
+    composes: btn;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid oklch(from var(--color-ink) l c h / 0.2);
+    &:hover { background: oklch(from var(--color-ink) l c h / 0.05); }
+  }
+
+  .btn-gold {
+    composes: btn;
+    background: var(--color-gold);
+    color: white;
+    &:hover { background: var(--color-gold-dark); }
+  }
+
+  .input {
+    width: 100%;
+    border: 1px solid oklch(from var(--color-ink) l c h / 0.18);
+    background: white;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    border-radius: 3px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+
+    &::placeholder { color: oklch(from var(--color-ink) l c h / 0.35); }
+
+    &:focus {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px oklch(from var(--color-gold) l c h / 0.15);
+    }
+  }
+
+  .card {
+    background: white;
+    border: 1px solid oklch(from var(--color-ink) l c h / 0.08);
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.625rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: oklch(from var(--color-ink) l c h / 0.4);
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid oklch(from var(--color-ink) l c h / 0.08);
+  }
+}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.25s ease forwards;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-parchment-dark) 25%,
+    var(--color-parchment-darker) 50%,
+    var(--color-parchment-dark) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* ── Hover underline link effect ──────────────────────── */
+.link-hover {
+  position: relative;
+  text-decoration: none;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--color-gold);
+    transition: width 0.25s ease;
+  }
+  &:hover::after { width: 100%; }
+}
