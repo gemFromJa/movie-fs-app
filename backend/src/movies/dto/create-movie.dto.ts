@@ -20,6 +20,10 @@ export class CreateMovieDto {
   @IsNotEmpty()
   director: string;
 
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
   @IsOptional()
   @IsString()
   @IsNotEmpty()

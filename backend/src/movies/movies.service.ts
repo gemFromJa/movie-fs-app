@@ -21,6 +21,17 @@ export class MoviesService {
     private actorsRepository: Repository<Actor>,
   ) {}
 
+  async find(movieId: number) {
+    const existingMovie = await this.moviesRepository.findOneBy({
+      id: movieId,
+    });
+    if (!existingMovie) {
+      throw new NotFoundException(`Movie with id ${movieId} not found`);
+    }
+
+    return existingMovie;
+  }
+
   async findAll(paginationDto: PaginationQueryDto) {
     const [movies, total] = await this.moviesRepository.findAndCount({
       where: paginationDto.search

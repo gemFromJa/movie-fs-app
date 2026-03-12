@@ -13,6 +13,10 @@ export class UpdateMovieDto {
 
   @IsOptional()
   @IsNotEmpty()
+  description: string;
+
+  @IsOptional()
+  @IsNotEmpty()
   poster: string;
 
   @IsOptional()

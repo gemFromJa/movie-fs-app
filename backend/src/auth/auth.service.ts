@@ -8,7 +8,6 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
 
   login(loginDto: LoginDto) {
-    console.log(USERS);
     const user = USERS.find(
       (u) =>
         u.username === loginDto.username && u.password === loginDto.password,
@@ -16,9 +15,15 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException('Invalid Credentials');
 
-    const payload = { sub: user.id, username: user.username, role: user.role };
+    const _user = {
+      username: user.username,
+      role: user.role,
+    };
+
+    const payload = { sub: user.id, ..._user };
     return {
       access_token: this.jwtService.sign(payload),
+      user: _user,
     };
   }
 }

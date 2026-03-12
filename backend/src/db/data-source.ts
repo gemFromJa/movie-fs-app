@@ -1,8 +1,4 @@
-// src/database/data-source.ts
 import dotenv from 'dotenv';
-// import { Actor } from '../actors/entities/actor.entity';
-// import { Movie } from '../movies/entities/movies.entity';
-// import { Review } from '../reviews/entities/review.entity';
 import { DataSource } from 'typeorm';
 
 dotenv.config();

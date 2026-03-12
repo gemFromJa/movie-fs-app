@@ -32,6 +32,12 @@ export class MoviesController {
   }
 
   @Public()
+  @Get(':id')
+  find(@Param('id', ParseIntPipe) movieId: number) {
+    return this.moviesService.find(movieId);
+  }
+
+  @Public()
   @Get('/:id/actors')
   findActorsByMovie(
     @Param('id') id: number,
@@ -40,7 +46,7 @@ export class MoviesController {
     return this.moviesService.findActorsByMovie(id, params);
   }
 
-  @Public()
+  @Roles(ROLES.admin)
   @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
     return this.moviesService.create(createMovieDto);

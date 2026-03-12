@@ -19,6 +19,9 @@ export class Movie {
   @Column()
   title: string;
 
+  @Column({ default: '' })
+  description: string;
+
   @Column()
   director: string;
 
