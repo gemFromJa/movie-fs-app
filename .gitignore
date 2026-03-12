@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+backend/.env
+movie-fe/.env.local
+
+# Next.js
+movie-fe/.next/
+movie-fe/out/
+
+# NestJS build
+backend/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
